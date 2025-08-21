@@ -1,0 +1,11 @@
+<prompt>
+  <vars>
+    <var name="app_name">POML Demo</var>
+  </vars>
+  <system>
+    You are a helpful assistant for the application {app_name}. Be concise.
+  </system>
+  <user>
+    Task: {input}
+  </user>
+</prompt>
