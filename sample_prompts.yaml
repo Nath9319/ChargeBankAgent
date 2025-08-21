@@ -1,0 +1,243 @@
+# Sample POML Prompts for ChargeBank Agent
+# This file contains example prompts that can be loaded into the POML engine
+
+---
+name: "customer_service"
+version: "1.0.0"
+description: "Handle customer service inquiries and provide helpful responses"
+system_message: |
+  You are a professional customer service representative for ChargeBank. 
+  You are knowledgeable about banking services, transactions, and financial products.
+  Always be polite, helpful, and provide accurate information.
+user_message_template: |
+  Customer Inquiry: {{inquiry}}
+  
+  Customer Details:
+  - Account Type: {{account_type}}
+  - Issue Category: {{issue_category}}
+  - Priority Level: {{priority_level}}
+  
+  Please provide a comprehensive response that:
+  1. Addresses the customer's concern
+  2. Offers relevant solutions
+  3. Provides next steps if needed
+  4. Maintains a professional and helpful tone
+variables:
+  - name: "inquiry"
+    description: "The customer's question or concern"
+    type: "string"
+    required: true
+  - name: "account_type"
+    description: "Type of account (checking, savings, credit, etc.)"
+    type: "string"
+    required: false
+    default: "general"
+  - name: "issue_category"
+    description: "Category of the issue (technical, billing, fraud, etc.)"
+    type: "string"
+    required: false
+    default: "general"
+  - name: "priority_level"
+    description: "Priority level of the issue (low, medium, high, urgent)"
+    type: "string"
+    required: false
+    default: "medium"
+output_format:
+  type: "object"
+  properties:
+    response:
+      type: "string"
+      description: "Main response to the customer"
+    solutions:
+      type: "array"
+      items:
+        type: "string"
+      description: "List of solutions offered"
+    next_steps:
+      type: "array"
+      items:
+        type: "string"
+      description: "Recommended next steps"
+    escalation_needed:
+      type: "boolean"
+      description: "Whether the issue needs escalation"
+    follow_up_required:
+      type: "boolean"
+      description: "Whether follow-up is required"
+
+---
+name: "fraud_detection"
+version: "1.0.0"
+description: "Analyze transactions for potential fraud and security threats"
+system_message: |
+  You are a fraud detection specialist with expertise in financial security.
+  Analyze transaction patterns and identify potential fraudulent activities.
+  Provide risk assessments and recommended actions.
+user_message_template: |
+  Transaction Data:
+  {{transaction_data}}
+  
+  Account History:
+  {{account_history}}
+  
+  Risk Indicators:
+  {{risk_indicators}}
+  
+  Analyze this data for:
+  1. Fraud patterns
+  2. Risk assessment
+  3. Recommended actions
+  4. Security measures
+variables:
+  - name: "transaction_data"
+    description: "Recent transaction details in JSON format"
+    type: "string"
+    required: true
+  - name: "account_history"
+    description: "Account transaction history and patterns"
+    type: "string"
+    required: false
+    default: "No additional history provided"
+  - name: "risk_indicators"
+    description: "Known risk indicators or suspicious patterns"
+    type: "string"
+    required: false
+    default: "No specific risk indicators"
+output_format:
+  type: "object"
+  properties:
+    risk_score:
+      type: "number"
+      description: "Risk score from 0-100"
+    fraud_probability:
+      type: "string"
+      description: "Probability of fraud (low, medium, high, critical)"
+    suspicious_patterns:
+      type: "array"
+      items:
+        type: "string"
+      description: "Identified suspicious patterns"
+    recommended_actions:
+      type: "array"
+      items:
+        type: "string"
+      description: "Recommended security actions"
+    immediate_steps:
+      type: "array"
+      items:
+        type: "string"
+      description: "Immediate steps to take"
+    escalation_level:
+      type: "string"
+      description: "Required escalation level"
+
+---
+name: "investment_advisor"
+version: "1.0.0"
+description: "Provide investment advice based on customer profile and market conditions"
+system_message: |
+  You are a certified investment advisor with expertise in portfolio management,
+  risk assessment, and market analysis. Provide personalized investment recommendations
+  based on the customer's financial situation and goals.
+user_message_template: |
+  Customer Profile:
+  - Age: {{age}}
+  - Investment Goals: {{goals}}
+  - Risk Tolerance: {{risk_tolerance}}
+  - Investment Horizon: {{time_horizon}}
+  - Current Portfolio: {{current_portfolio}}
+  - Available Capital: {{available_capital}}
+  
+  Market Conditions:
+  {{market_conditions}}
+  
+  Provide comprehensive investment advice including:
+  1. Asset allocation recommendations
+  2. Specific investment products
+  3. Risk management strategies
+  4. Portfolio rebalancing advice
+  5. Market outlook and timing
+variables:
+  - name: "age"
+    description: "Customer's age"
+    type: "integer"
+    required: true
+  - name: "goals"
+    description: "Investment goals (retirement, growth, income, etc.)"
+    type: "string"
+    required: true
+  - name: "risk_tolerance"
+    description: "Risk tolerance level (conservative, moderate, aggressive)"
+    type: "string"
+    required: true
+  - name: "time_horizon"
+    description: "Investment time horizon in years"
+    type: "string"
+    required: true
+  - name: "current_portfolio"
+    description: "Current investment portfolio details"
+    type: "string"
+    required: false
+    default: "No current portfolio"
+  - name: "available_capital"
+    description: "Available capital for investment"
+    type: "string"
+    required: true
+  - name: "market_conditions"
+    description: "Current market conditions and outlook"
+    type: "string"
+    required: false
+    default: "Standard market conditions"
+output_format:
+  type: "object"
+  properties:
+    asset_allocation:
+      type: "object"
+      properties:
+        stocks:
+          type: "string"
+          description: "Recommended stock allocation percentage"
+        bonds:
+          type: "string"
+          description: "Recommended bond allocation percentage"
+        alternatives:
+          type: "string"
+          description: "Recommended alternative investments percentage"
+        cash:
+          type: "string"
+          description: "Recommended cash allocation percentage"
+    investment_recommendations:
+      type: "array"
+      items:
+        type: "object"
+        properties:
+          product_type:
+            type: "string"
+          description:
+            type: "string"
+          allocation:
+            type: "string"
+          risk_level:
+            type: "string"
+    risk_management:
+      type: "array"
+      items:
+        type: "string"
+      description: "Risk management strategies"
+    portfolio_rebalancing:
+      type: "object"
+      properties:
+        frequency:
+          type: "string"
+        triggers:
+          type: "array"
+          items:
+            type: "string"
+    market_outlook:
+      type: "string"
+      description: "Market outlook and timing recommendations"
+    next_steps:
+      type: "array"
+      items:
+        type: "string"
+      description: "Recommended next steps for the customer"
