@@ -1,8 +1,0 @@
-langchain==0.3.10
-langgraph==0.2.60
-openai==1.58.1
-pydantic==2.10.4
-python-dotenv==1.0.1
-httpx==0.28.1
-typing-extensions==4.12.2
-tenacity==9.0.0
